@@ -30,7 +30,7 @@ _WINDLL_FUNC int	_LOG_VERSION_1_0_11 = 0 ;
 #if ( defined _WIN32 )
 __declspec( thread ) LOG	*tls_g = NULL ;
 #elif ( defined __linux__ ) || ( defined _AIX )
-__thread LOG			*tls_g = NULL ;
+__thread LOG			    *tls_g = NULL ;
 #endif
 
 /* 临界区 */ /* critical region */
@@ -41,13 +41,13 @@ pthread_mutex_t		g_pthread_mutex = PTHREAD_MUTEX_INITIALIZER ;
 static int CreateMutexSection( LOG *g )
 {
 #if ( defined _WIN32 )
-	char		lock_pathfilename[ MAXLEN_FILENAME + 1 ] ;
+	char lock_pathfilename[ MAXLEN_FILENAME + 1 ] ;
 	strcpy( lock_pathfilename , "Global\\iLOG3_ROTATELOCK" );
 	g->rotate_lock = CreateMutex( NULL , FALSE , lock_pathfilename ) ;
 	if( g->rotate_lock == NULL )
 		return LOG_RETURN_ERROR_INTERNAL;
 #elif ( defined __unix ) || ( defined _AIX ) || ( defined __linux__ ) || ( defined __hpux )
-	char		lock_pathfilename[ MAXLEN_FILENAME + 1 ] ;
+	char lock_pathfilename[ MAXLEN_FILENAME + 1 ] ;
 	mode_t		m ;
 	SNPRINTF( lock_pathfilename , sizeof(lock_pathfilename) , "/tmp/iLOG3.lock" );
 	m=umask(0);
@@ -204,13 +204,11 @@ void DestroyLogHandle( LOG *g )
 
 	return;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 void DestroyLogHandleG()
 {
 	DestroyLogHandle( tls_g );
 }
-#endif
+
 
 /* 创建日志句柄 */ /* create log handle */
 LOG *CreateLogHandle()
@@ -263,14 +261,12 @@ LOG *CreateLogHandle()
 
 	return g;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 LOG *CreateLogHandleG()
 {
 	tls_g = CreateLogHandle() ;
 	return tls_g;
 }
-#endif
+
 
 /* 打开、输出、关闭日志函数 */ /* open , write , close log functions */
 #if ( defined _WIN32 )
@@ -453,7 +449,6 @@ static int CloseLog_closelog( LOG *g , void **open_handle )
 	g->open_flag = 0 ;
 	return 0;
 }
-
 #endif
 
 static int WriteLog_write( LOG *g , void **open_handle , int log_level , char *buf , long len , long *writelen )
@@ -739,12 +734,11 @@ int SetLogOutput2( LOG *g , int output , funcOpenLog *pfuncOpenLogFirst , funcOp
 	return SetLogOutput( g , output , log_pathfilename , pfuncOpenLogFirst , pfuncOpenLog , pfuncWriteLog , pfuncChangeTest , pfuncCloseLog , pfuncCloseLogFinally );
 }
 
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogOutputG( int output , char *log_pathfilename , funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfuncOpenLog , funcWriteLog *pfuncWriteLog , funcChangeTest *pfuncChangeTest , funcCloseLog *pfuncCloseLog , funcCloseLog *pfuncCloseLogFinally )
 {
 	return SetLogOutput( tls_g , output , log_pathfilename , pfuncOpenLogFirst , pfuncOpenLog , pfuncWriteLog , pfuncChangeTest , pfuncCloseLog , pfuncCloseLogFinally );
 }
-#endif
+
 
 /* 设置日志等级 */ /* set log level */
 int SetLogLevel( LOG *g , int log_level )
@@ -754,13 +748,11 @@ int SetLogLevel( LOG *g , int log_level )
 	g->log_level = log_level ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogLevelG( int log_level )
 {
 	return SetLogLevel( tls_g , log_level );
 }
-#endif
+
 
 /* 行格式函数集合 */ /* log style functions */
 static int LogStyle_SEPARATOR( LOG *g , LOGBUF *logbuf , char *c_filename , long c_fileline , int log_level , char *format , va_list valist )
@@ -1053,13 +1045,11 @@ int SetLogStyles( LOG *g , long log_styles , funcLogStyle *pfuncLogStyle )
 
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogStylesG( long log_styles , funcLogStyle *pfuncLogStyles )
 {
 	return SetLogStyles( tls_g , log_styles , pfuncLogStyles );
 }
-#endif
+
 
 /* 转档日志文件 */ /* rotate log file */
 static int RotateLogFileSize( LOG *g , long step )
@@ -1420,14 +1410,12 @@ int WriteLog( LOG *g , char *c_filename , long c_fileline , int log_level , char
 	WRITELOGBASE( g , log_level )
 		return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int WriteLogG( char *c_filename , long c_fileline , int log_level , char *format , ... )
 {
 	WRITELOGBASE( tls_g , log_level )
 		return 0;
 }
-#endif
+
 
 /* 写调试日志 */ /* write debug log */
 int DebugLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
@@ -1435,14 +1423,11 @@ int DebugLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 	WRITELOGBASE( g , LOG_LEVEL_DEBUG )
 		return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int DebugLogG( char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( tls_g , LOG_LEVEL_DEBUG )
 		return 0;
 }
-#endif
 
 /* 写普通信息日志 */ /* write info log */
 int InfoLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
@@ -1450,14 +1435,12 @@ int InfoLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 	WRITELOGBASE( g , LOG_LEVEL_INFO )
 		return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int InfoLogG( char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( tls_g , LOG_LEVEL_INFO )
 		return 0;
 }
-#endif
+
 
 /* 写警告日志 */ /* write warn log */
 int WarnLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
@@ -1465,14 +1448,12 @@ int WarnLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 	WRITELOGBASE( g , LOG_LEVEL_WARN )
 		return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int WarnLogG( char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( tls_g , LOG_LEVEL_WARN )
 		return 0;
 }
-#endif
+
 
 /* 写错误日志 */ /* write error log */
 int ErrorLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
@@ -1480,14 +1461,12 @@ int ErrorLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 	WRITELOGBASE( g , LOG_LEVEL_ERROR )
 		return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int ErrorLogG( char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( tls_g , LOG_LEVEL_ERROR )
 		return 0;
 }
-#endif
+
 
 /* 写致命错误日志 */ /* write fatal log */
 int FatalLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
@@ -1495,14 +1474,12 @@ int FatalLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 	WRITELOGBASE( g , LOG_LEVEL_FATAL )
 		return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int FatalLogG( char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( tls_g , LOG_LEVEL_FATAL )
 		return 0;
 }
-#endif
+
 
 
 /* 文件变动测试间隔 */
@@ -1520,13 +1497,11 @@ int SetLogOptions( LOG *g , int log_options )
 
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogOptionsG( int log_options )
 {
 	return SetLogOptions( tls_g , log_options );
 }
-#endif
+
 
 /* 设置文件改变测试间隔 */
 int SetLogFileChangeTest( LOG *g , long interval )
@@ -1540,13 +1515,11 @@ int SetLogFileChangeTest( LOG *g , long interval )
 
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogFileChangeTestG( long interval )
 {
 	return SetLogFileChangeTest( tls_g , interval );
 }
-#endif
+
 
 /* 刷存储IO周期 */
 int SetLogFsyncPeriod( LOG *g , long period )
@@ -1556,13 +1529,11 @@ int SetLogFsyncPeriod( LOG *g , long period )
 
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogFsyncPeriodG( long period )
 {
 	return SetLogFsyncPeriod( tls_g , period );
 }
-#endif
+
 
 /* 设置日志自定义标签 */ /* set log custom labels */
 int SetLogCustLabel( LOG *g , int index , char *cust_label )
@@ -1581,13 +1552,11 @@ int SetLogCustLabel( LOG *g , int index , char *cust_label )
 		return LOG_RETURN_ERROR_PARAMETER;
 	}
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogCustLabelG( int index , char *cust_label )
 {
 	return SetLogCustLabel( tls_g , index , cust_label );
 }
-#endif
+
 
 /* 设置日志转档模式 */ /* set log rotate mode */
 int SetLogRotateMode( LOG *g , int rotate_mode )
@@ -1606,13 +1575,11 @@ int SetLogRotateMode( LOG *g , int rotate_mode )
 		return LOG_RETURN_ERROR_PARAMETER;
 	}
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogRotateModeG( int rotate_mode )
 {
 	return SetLogRotateMode( tls_g , rotate_mode );
 }
-#endif
+
 
 /* 设置日志转档大小 */ /* set rotate size */
 int SetLogRotateSize( LOG *g , long log_rotate_size )
@@ -1624,13 +1591,11 @@ int SetLogRotateSize( LOG *g , long log_rotate_size )
 	g->log_rotate_size = log_rotate_size ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogRotateSizeG( long log_rotate_size )
 {
 	return SetLogRotateSize( tls_g , log_rotate_size );
 }
-#endif
+
 
 /* 设置日志转档紧迫系数 */ /* set rotate pressure fator */
 int SetLogRotatePressureFactor( LOG *g , long pressure_factor )
@@ -1642,13 +1607,11 @@ int SetLogRotatePressureFactor( LOG *g , long pressure_factor )
 	g->pressure_factor = pressure_factor ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogRotatePressureFactorG( long pressure_factor )
 {
 	return SetLogRotatePressureFactor( tls_g , pressure_factor );
 }
-#endif
+
 
 /* 设置日志转档最大后缀序号 */
 int SetLogRotateFileCount( LOG *g , long rotate_file_count )
@@ -1660,13 +1623,11 @@ int SetLogRotateFileCount( LOG *g , long rotate_file_count )
 	g->rotate_file_count = rotate_file_count ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogRotateFileCountG( long rotate_file_count )
 {
 	return SetLogRotateFileCount( tls_g , rotate_file_count );
 }
-#endif
+
 
 /* 设置自定义日志转档前回调函数 */ /* set custom callback function before rotate log */
 int SetBeforeRotateFileFunc( LOG *g , funcBeforeRotateFile *pfuncBeforeRotateFile )
@@ -1674,13 +1635,11 @@ int SetBeforeRotateFileFunc( LOG *g , funcBeforeRotateFile *pfuncBeforeRotateFil
 	g->pfuncBeforeRotateFile = pfuncBeforeRotateFile ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetBeforeRotateFileFuncG( funcBeforeRotateFile *pfuncBeforeRotateFile )
 {
 	return SetBeforeRotateFileFunc( tls_g , pfuncBeforeRotateFile );
 }
-#endif
+
 
 /* 设置自定义日志转档后回调函数 */ /* set custom callback function after rotate log */
 int SetAfterRotateFileFunc( LOG *g , funcAfterRotateFile *pfuncAfterRotateFile )
@@ -1688,13 +1647,11 @@ int SetAfterRotateFileFunc( LOG *g , funcAfterRotateFile *pfuncAfterRotateFile )
 	g->pfuncAfterRotateFile = pfuncAfterRotateFile ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetAfterRotateFileFuncG( funcAfterRotateFile *pfuncAfterRotateFile )
 {
 	return SetAfterRotateFileFunc( tls_g , pfuncAfterRotateFile );
 }
-#endif
+
 
 /* 设置自定义检查日志等级回调函数类型 */ /* set custom filter callback function */
 int SetFilterLogFunc( LOG *g , funcFilterLog *pfuncFilterLog )
@@ -1702,27 +1659,21 @@ int SetFilterLogFunc( LOG *g , funcFilterLog *pfuncFilterLog )
 	g->pfuncFilterLog = pfuncFilterLog ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetFilterLogFuncG( funcFilterLog *pfuncFilterLog )
 {
 	return SetFilterLogFunc( tls_g , pfuncFilterLog );
 }
-#endif
+
 
 /* 设置行日志缓冲区大小 */ /* set log buffer size */
 int SetLogBufferSize( LOG *g , long log_bufsize , long max_log_bufsize )
 {
 	return SetBufferSize( g , & (g->logbuf) , log_bufsize , max_log_bufsize );
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogBufferSizeG( long log_bufsize , long max_log_bufsize )
 {
 	return SetLogBufferSize( tls_g , log_bufsize , max_log_bufsize );
 }
-#endif
-
 
 
 /* 直接设置日志输出回调函数 */
@@ -1736,13 +1687,11 @@ int SetLogOutputFuncDirectly( LOG *g , funcOpenLog *pfuncOpenLogFirst , funcOpen
 	g->pfuncCloseLogFinally = pfuncCloseLogFinally ;
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogOutputFuncDirectlyG( funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfuncOpenLog , funcWriteLog *pfuncWriteLog , funcChangeTest *pfuncChangeTest , funcCloseLog *pfuncCloseLog , funcCloseLog *pfuncCloseLogFinally )
 {
 	return SetLogOutputFuncDirectly( tls_g , pfuncOpenLogFirst , pfuncOpenLog , pfuncWriteLog , pfuncChangeTest , pfuncCloseLog , pfuncCloseLogFinally );
 }
-#endif
+
 
 /* 直接设置行日志风格回调函数 */
 int SetLogStyleFuncDirectly( LOG *g , funcLogStyle *pfuncLogStyle )
@@ -1751,15 +1700,12 @@ int SetLogStyleFuncDirectly( LOG *g , funcLogStyle *pfuncLogStyle )
 
 	return 0;
 }
-
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
 int SetLogStyleFuncDirectlyG( funcLogStyle *pfuncLogStyle )
 {
 	return SetLogStyleFuncDirectly( tls_g , pfuncLogStyle );
 }
-#endif
 
-#if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
+
 /* 得到基于线程本地存储的缺省日志句柄的函数版本 */
 LOG *GetGlobalLOG()
 {
@@ -1770,7 +1716,7 @@ void SetGlobalLOG( LOG *g )
 	tls_g = g ;
 	return;
 }
-#endif
+
 
 int SetOpenFlag( LOG *g , char open_flag )
 {
