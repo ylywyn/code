@@ -74,11 +74,13 @@ public:
 	}
 
 	//根据id返回， host
-	iterator find(std::string& key) {
+	iterator find(const std::string& key) 
+	{
 		return find(hasher_.hash(key));
 	}
 
 	void set_vnode_count(std::size_t c){ vnodecount_ = c; }
+	
 private:
 	std::size_t size() const {
 		return nodes_.size();
