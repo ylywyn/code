@@ -1,4 +1,4 @@
-#ifndef _H_LOG_
+ï»¿#ifndef _H_LOG_
 #define _H_LOG_
 
 /*
@@ -52,51 +52,51 @@ extern "C" {
 #endif
 
 
-	/* ÈÕÖ¾µÈ¼¶ºê */ 
-#define LOG_LEVEL_DEBUG		0	/* µ÷ÊÔµÈ¼¶ */ 
-#define LOG_LEVEL_INFO		1	/* ÆÕÍ¨ĞÅÏ¢µÈ¼¶ */ 
-#define LOG_LEVEL_WARN		2	/* ¾¯¸æµÈ¼¶ */ 
-#define LOG_LEVEL_ERROR		3	/* ´íÎóµÈ¼¶ */ 
-#define LOG_LEVEL_FATAL		4	/* ÑÏÖØ´íÎóµÈ¼¶ */ 
-#define LOG_LEVEL_NOLOG		5	/* ²»ĞèÒªÊä³öÈÕÖ¾ */ 
+	/* æ—¥å¿—ç­‰çº§å® */ 
+#define LOG_LEVEL_DEBUG		0	/* è°ƒè¯•ç­‰çº§ */ 
+#define LOG_LEVEL_INFO		1	/* æ™®é€šä¿¡æ¯ç­‰çº§ */ 
+#define LOG_LEVEL_WARN		2	/* è­¦å‘Šç­‰çº§ */ 
+#define LOG_LEVEL_ERROR		3	/* é”™è¯¯ç­‰çº§ */ 
+#define LOG_LEVEL_FATAL		4	/* ä¸¥é‡é”™è¯¯ç­‰çº§ */ 
+#define LOG_LEVEL_NOLOG		5	/* ä¸éœ€è¦è¾“å‡ºæ—¥å¿— */ 
 
 
-	/* ÈÕÖ¾Êä³öÀàĞÍ */ 
-#define LOG_OUTPUT_NOSET	-1		/* ²»ÉèÖÃ */
-#define LOG_OUTPUT_STDOUT	1		/* ±ê×¼Êä³ö */ 
-#define LOG_OUTPUT_STDERR	2		/* ±ê×¼´íÎóÊä³ö */
-#define LOG_OUTPUT_SYSLOG	3		/* UNIX&LinuxµÄsyslog »ò WindowsµÄWINDOWS EVENT */
-#define LOG_OUTPUT_FILE		11		/* ÎÄ¼ş */ 
-#define LOG_OUTPUT_CALLBACK	21		/* £¨Ê¹ÓÃ×Ô¶¨ÒåÈÕÖ¾Êä³ö»Øµ÷º¯Êı£© */
+	/* æ—¥å¿—è¾“å‡ºç±»å‹ */ 
+#define LOG_OUTPUT_NOSET	-1		/* ä¸è®¾ç½® */
+#define LOG_OUTPUT_STDOUT	1		/* æ ‡å‡†è¾“å‡º */ 
+#define LOG_OUTPUT_STDERR	2		/* æ ‡å‡†é”™è¯¯è¾“å‡º */
+#define LOG_OUTPUT_SYSLOG	3		/* UNIX&Linuxçš„syslog æˆ– Windowsçš„WINDOWS EVENT */
+#define LOG_OUTPUT_FILE		11		/* æ–‡ä»¶ */ 
+#define LOG_OUTPUT_CALLBACK	21		/* ï¼ˆä½¿ç”¨è‡ªå®šä¹‰æ—¥å¿—è¾“å‡ºå›è°ƒå‡½æ•°ï¼‰ */
 #define LOG_LEVEL_DEFAULT	LOG_LEVEL_NOLOG
 
 
-	/* ĞĞÈÕÖ¾·ç¸ñ×éºÏºê */ 
-#define LOG_STYLE_DATE			1		/* ÈÕÆÚ"YYYY-MM-DD" */ 
-#define LOG_STYLE_DATETIME		2		/* ÈÕÆÚÊ±¼ä"YYYY-MM-DD hh:mm:ss" */ 
-#define LOG_STYLE_DATETIMEMS	4		/* ÈÕÆÚÊ±¼äºÁÃë"YYYY-MM-DD hh:mm:ss.6ms"£¨ÈÕÆÚÊ±¼äÀàºê»¥³â£¬ÓÅÏÈ×Ô¶¯Ñ¡ÓÃĞÅÏ¢Á¿×î¶àµÄ£© */
-#define LOG_STYLE_LOGLEVEL		8		/* ÈÕÖ¾µÈ¼¶ */ 
-#define LOG_STYLE_PID			16		/* ½ø³Ìid */ 
-#define LOG_STYLE_TID			32		/* Ïß³Ìid */ 
-#define LOG_STYLE_SOURCE		64		/* "Ô´´úÂëÎÄ¼şÃû:Ô´´úÂëĞĞºÅ" */ 
-#define LOG_STYLE_FORMAT		128		/* Ó¦ÓÃÈÕÖ¾¶Î */ 
-#define LOG_STYLE_NEWLINE		256		/* »»ĞĞ */ 
-#define LOG_STYLE_CUSTLABEL1	512		/* ×Ô¶¨Òå±êÇ©1 */
-#define LOG_STYLE_CUSTLABEL2	1024	/* ×Ô¶¨Òå±êÇ©2 */ 
-#define LOG_STYLE_CUSTLABEL3	2048	/* ×Ô¶¨Òå±êÇ©3 */ 
-#define LOG_STYLE_CALLBACK		4096	/* £¨Ê¹ÓÃ×Ô¶¨ÒåĞĞÈÕÖ¾·ç¸ñ»Øµ÷º¯Êı£© */ 
+	/* è¡Œæ—¥å¿—é£æ ¼ç»„åˆå® */ 
+#define LOG_STYLE_DATE			1		/* æ—¥æœŸ"YYYY-MM-DD" */ 
+#define LOG_STYLE_DATETIME		2		/* æ—¥æœŸæ—¶é—´"YYYY-MM-DD hh:mm:ss" */ 
+#define LOG_STYLE_DATETIMEMS	4		/* æ—¥æœŸæ—¶é—´æ¯«ç§’"YYYY-MM-DD hh:mm:ss.6ms"ï¼ˆæ—¥æœŸæ—¶é—´ç±»å®äº’æ–¥ï¼Œä¼˜å…ˆè‡ªåŠ¨é€‰ç”¨ä¿¡æ¯é‡æœ€å¤šçš„ï¼‰ */
+#define LOG_STYLE_LOGLEVEL		8		/* æ—¥å¿—ç­‰çº§ */ 
+#define LOG_STYLE_PID			16		/* è¿›ç¨‹id */ 
+#define LOG_STYLE_TID			32		/* çº¿ç¨‹id */ 
+#define LOG_STYLE_SOURCE		64		/* "æºä»£ç æ–‡ä»¶å:æºä»£ç è¡Œå·" */ 
+#define LOG_STYLE_FORMAT		128		/* åº”ç”¨æ—¥å¿—æ®µ */ 
+#define LOG_STYLE_NEWLINE		256		/* æ¢è¡Œ */ 
+#define LOG_STYLE_CUSTLABEL1	512		/* è‡ªå®šä¹‰æ ‡ç­¾1 */
+#define LOG_STYLE_CUSTLABEL2	1024	/* è‡ªå®šä¹‰æ ‡ç­¾2 */ 
+#define LOG_STYLE_CUSTLABEL3	2048	/* è‡ªå®šä¹‰æ ‡ç­¾3 */ 
+#define LOG_STYLE_CALLBACK		4096	/* ï¼ˆä½¿ç”¨è‡ªå®šä¹‰è¡Œæ—¥å¿—é£æ ¼å›è°ƒå‡½æ•°ï¼‰ */ 
 #define LOG_STYLES_DEFAULT		0
 
 
-	/* º¯Êı·µ»ØÖµºê */ 
-#define LOG_RETURN_ERROR_ALLOC		-11		/* ÉêÇëÄÚ´æÊ§°Ü */ 
-#define LOG_RETURN_ERROR_INTERNAL	-12		/* ÄÚ²¿´íÎó */ 
-#define LOG_RETURN_ERROR_ALLOC_MAX	-13		/* ÄÚ´æÊ¹ÓÃ³¬ÏŞ */
-#define LOG_RETURN_ERROR_PARAMETER	-14		/* ²ÎÊı´íÎó */ 
-#define LOG_RETURN_ERROR_NOTSUPPORT	-17		/* Ôİ²»Ö§³Ö */ 
-#define LOG_RETURN_ERROR_CREATEFILE	-21		/* ´´½¨ÎÄ¼şÊ§°Ü */
-#define LOG_RETURN_ERROR_OPENFILE	-22		/* ´ò¿ªÎÄ¼şÊ§°Ü */
-#define LOG_RETURN_ERROR_WRITEFILE	-23		/* Ğ´ÎÄ¼şÊ§°Ü */ 
+	/* å‡½æ•°è¿”å›å€¼å® */ 
+#define LOG_RETURN_ERROR_ALLOC		-11		/* ç”³è¯·å†…å­˜å¤±è´¥ */ 
+#define LOG_RETURN_ERROR_INTERNAL	-12		/* å†…éƒ¨é”™è¯¯ */ 
+#define LOG_RETURN_ERROR_ALLOC_MAX	-13		/* å†…å­˜ä½¿ç”¨è¶…é™ */
+#define LOG_RETURN_ERROR_PARAMETER	-14		/* å‚æ•°é”™è¯¯ */ 
+#define LOG_RETURN_ERROR_NOTSUPPORT	-17		/* æš‚ä¸æ”¯æŒ */ 
+#define LOG_RETURN_ERROR_CREATEFILE	-21		/* åˆ›å»ºæ–‡ä»¶å¤±è´¥ */
+#define LOG_RETURN_ERROR_OPENFILE	-22		/* æ‰“å¼€æ–‡ä»¶å¤±è´¥ */
+#define LOG_RETURN_ERROR_WRITEFILE	-23		/* å†™æ–‡ä»¶å¤±è´¥ */ 
 
 
 #define LOG_NO_STYLEFUNC	NULL
@@ -111,25 +111,25 @@ extern "C" {
 	typedef struct tagLOGBUF LOGBUF ;
 
 
-	/* ¹ÜÀíÈÕÖ¾¾ä±úº¯Êı */ 
+	/* ç®¡ç†æ—¥å¿—å¥æŸ„å‡½æ•° */ 
 	_WINDLL_FUNC LOG *CreateLogHandle();
 	_WINDLL_FUNC void DestroyLogHandle( LOG *g );
 
-	/* ×Ô¶¨Òå´ò¿ª¡¢Êä³ö¡¢¹Ø±ÕÈÕÖ¾º¯ÊıÀàĞÍ */ 
+	/* è‡ªå®šä¹‰æ‰“å¼€ã€è¾“å‡ºã€å…³é—­æ—¥å¿—å‡½æ•°ç±»å‹ */ 
 	typedef int funcOpenLog( LOG *g , char *log_pathfilename , void **open_handle );
 	typedef int funcWriteLog( LOG *g , void **open_handle , int log_level , char *buf , long len , long *writelen );
 	typedef int funcChangeTest( LOG *g , void **test_handle );
 	typedef int funcCloseLog( LOG *g , void **open_handle );
 	typedef int funcLogStyle( LOG *g , LOGBUF *logbuf , char *c_filename , long c_fileline , int log_level , char *format , va_list valist );
 
-	/* ¾ä±ú»·¾³ÉèÖÃº¯Êı */
+	/* å¥æŸ„ç¯å¢ƒè®¾ç½®å‡½æ•° */
 	_WINDLL_FUNC int SetLogOutput( LOG *g , int output , char *log_pathfilename , funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfuncOpenLog , funcWriteLog *pfuncWriteLog , funcChangeTest *pfuncChangeTest , funcCloseLog *pfuncCloseLog , funcCloseLog *pfuncCloseLogFinally );
 	_WINDLL_FUNC int SetLogOutput2( LOG *g , int output , funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfuncOpenLog , funcWriteLog *pfuncWriteLog , funcChangeTest *pfuncChangeTest , funcCloseLog *pfuncCloseLog , funcCloseLog *pfuncCloseLogFinally , char *log_pathfilename_format , ... );
 	_WINDLL_FUNC int SetLogLevel( LOG *g , int log_level );
 	_WINDLL_FUNC int SetLogStyles( LOG *g , long log_styles , funcLogStyle *pfuncLogStyle );
 
 
-	/* Ğ´ÈÕÖ¾º¯Êı */ /* output log */
+	/* å†™æ—¥å¿—å‡½æ•° */ /* output log */
 	_WINDLL_FUNC int WriteLog( LOG *g , char *c_filename , long c_fileline , int log_level , char *format , ... );
 	_WINDLL_FUNC int DebugLog( LOG *g , char *c_filename , long c_fileline , char *format , ... );
 	_WINDLL_FUNC int InfoLog( LOG *g , char *c_filename , long c_fileline , char *format , ... );
@@ -138,7 +138,7 @@ extern "C" {
 	_WINDLL_FUNC int FatalLog( LOG *g , char *c_filename , long c_fileline , char *format , ... );
 
 
-	/* Ğ´ÈÕÖ¾º¯ÊıµÄ¿É±ä²ÎÊıºê */ /* output log macros */
+	/* å†™æ—¥å¿—å‡½æ•°çš„å¯å˜å‚æ•°å® */ /* output log macros */
 #define LOGFAST( _g_ , _log_level_ , ... )	\
 	if ((_log_level_) >= _g_->log_level) \
 	WriteLog( _g_ , __FILE__ , __LINE__ , _log_level_ , __VA_ARGS__ );
@@ -151,7 +151,7 @@ extern "C" {
 #define FATALLOG( _g_ , ... )			FatalLog( _g_ , __FILE__ , __LINE__ , __VA_ARGS__ );
 
 
-	//Ïß³Ì°²È«µÄÈÕÖ¾
+	//çº¿ç¨‹å®‰å…¨çš„æ—¥å¿—
 	_WINDLL_FUNC LOG *CreateLogHandleG();
 	_WINDLL_FUNC void DestroyLogHandleG();
 
@@ -163,7 +163,7 @@ extern "C" {
 	SetLogOutput2(_output_,_pfuncOpenLogFirst_,_pfuncOpenLog_,_pfuncWriteLog_,_pfuncChangeTest_,_pfuncCloseLog_,_pfuncCloseLogFinally_,_log_pathfilename_format_,__VA_ARGS__)
 
 
-	/* Ğ´ÈÕÖ¾º¯Êı£¨»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±úµÄº¯Êı¼¯ºÏ°æ±¾£© */ 
+	/* å†™æ—¥å¿—å‡½æ•°ï¼ˆåŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„çš„å‡½æ•°é›†åˆç‰ˆæœ¬ï¼‰ */ 
 	_WINDLL_FUNC int WriteLogG( char *c_filename , long c_fileline , int log_level , char *format , ... );
 	_WINDLL_FUNC int DebugLogG( char *c_filename , long c_fileline , char *format , ... );
 	_WINDLL_FUNC int InfoLogG( char *c_filename , long c_fileline , char *format , ... );
@@ -172,7 +172,7 @@ extern "C" {
 	_WINDLL_FUNC int FatalLogG( char *c_filename , long c_fileline , char *format , ... );
 
 
-	/* Ğ´ÈÕÖ¾º¯ÊıµÄ¿É±ä²ÎÊıºê£¨»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±úµÄº¯Êı¼¯ºÏ°æ±¾£© */  
+	/* å†™æ—¥å¿—å‡½æ•°çš„å¯å˜å‚æ•°å®ï¼ˆåŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„çš„å‡½æ•°é›†åˆç‰ˆæœ¬ï¼‰ */  
 #define WRITELOGG( _log_level_ , ... )	WriteLogG( __FILE__ , __LINE__ , _log_level_ , __VA_ARGS__ );
 #define DEBUGLOGG( ... )		DebugLogG( __FILE__ , __LINE__ , __VA_ARGS__ );
 #define INFOLOGG( ... )			InfoLogG( __FILE__ , __LINE__ , __VA_ARGS__ );
@@ -183,55 +183,55 @@ extern "C" {
 
 
 	/********************************************************/
-	/* ÒÔÏÂÎª¸ß¼¶ÌØĞÔ                                       */
+	/* ä»¥ä¸‹ä¸ºé«˜çº§ç‰¹æ€§                                       */
 	/********************************************************/
 
-	/* ×Ô¶¨Òå¼ì²éÈÕÖ¾µÈ¼¶»Øµ÷º¯ÊıÀàĞÍ */ 
+	/* è‡ªå®šä¹‰æ£€æŸ¥æ—¥å¿—ç­‰çº§å›è°ƒå‡½æ•°ç±»å‹ */ 
 	typedef int funcFilterLog( LOG *g , void **open_handle , int log_level , char *buf , long len );
 
-	/* ×Ô¶¨ÒåÈÕÖ¾×ªµµÇ°ºó»Øµ÷º¯ÊıÀàĞÍ */ 
+	/* è‡ªå®šä¹‰æ—¥å¿—è½¬æ¡£å‰åå›è°ƒå‡½æ•°ç±»å‹ */ 
 	typedef int funcBeforeRotateFile( LOG *g , char *rotate_log_pathfilename );
 	typedef int funcAfterRotateFile( LOG *g , char *rotate_log_pathfilename );
 
-	/* ×Ô¶¨Òå±êÇ©ÊıÁ¿ */ 
+	/* è‡ªå®šä¹‰æ ‡ç­¾æ•°é‡ */ 
 #define LOG_MAXCNT_CUST_LABEL		3
 
-	/* ×Ô¶¨Òå±êÇ©×î´ó³¤¶È */ 
+	/* è‡ªå®šä¹‰æ ‡ç­¾æœ€å¤§é•¿åº¦ */ 
 #define LOG_MAXLEN_CUST_LABEL		32
 
 
-	/* ÈÕÖ¾Ñ¡Ïî */ 
-#define LOG_OPTION_OPEN_AND_CLOSE			1	/* Ã¿´Î¶¼´ò¿ªÈÕÖ¾¡¢Ğ´ÈÕÖ¾¡¢¹Ø±ÕÈÕÖ¾ */ 
-#define LOG_OPTION_CHANGE_TEST				2	/* Õì²âÎÄ¼ş±ä¶¯   Ä¬ÈÏ*/
-#define LOG_OPTION_OPEN_ONCE				4	/* ÈÕÖ¾´ò¿ªÒ»´Î²»¹Ø±Õ */ 
-#define LOG_OPTION_SET_OUTPUT_BY_FILENAME	8	/* ×Ô¶¯¸ù¾İÎÄ¼şÃûÖØÖÃÊä³öÀàĞÍ */
+	/* æ—¥å¿—é€‰é¡¹ */ 
+#define LOG_OPTION_OPEN_AND_CLOSE			1	/* æ¯æ¬¡éƒ½æ‰“å¼€æ—¥å¿—ã€å†™æ—¥å¿—ã€å…³é—­æ—¥å¿— */ 
+#define LOG_OPTION_CHANGE_TEST				2	/* ä¾¦æµ‹æ–‡ä»¶å˜åŠ¨   é»˜è®¤*/
+#define LOG_OPTION_OPEN_ONCE				4	/* æ—¥å¿—æ‰“å¼€ä¸€æ¬¡ä¸å…³é—­ */ 
+#define LOG_OPTION_SET_OUTPUT_BY_FILENAME	8	/* è‡ªåŠ¨æ ¹æ®æ–‡ä»¶åé‡ç½®è¾“å‡ºç±»å‹ */
 
 	/* "#stdout" -> LOG_OUTPUT_STDOUT */
 	/* "#stderr" -> LOG_OUTPUT_STDERR */
 	/* "#syslog" -> LOG_OUTPUT_SYSLOG */
-#define LOG_OPTION_FILENAME_APPEND_DOT_LOG	16	/* ÈÕÖ¾Êä³öÎÄ¼şÃûºó×Ô¶¯¼ÓÉÏ".log" */ 
+#define LOG_OPTION_FILENAME_APPEND_DOT_LOG	16	/* æ—¥å¿—è¾“å‡ºæ–‡ä»¶ååè‡ªåŠ¨åŠ ä¸Š".log" */ 
 
 #define LOG_OPTION_OPEN_DEFAULT			LOG_OPTION_CHANGE_TEST
 
 
-	/* ÈÕÖ¾×ªµµÄ£Ê½ */ 
-#define LOG_ROTATEMODE_NONE			0	/* ²»×ªµµ */ 
-#define LOG_ROTATEMODE_SIZE			1	/* °´ÈÕÖ¾ÎÄ¼ş´óĞ¡×ªµµ£¬ºÍº¯ÊıSetLogRotateSizeÅäºÏÊ¹ÓÃ£»×ªµµÎÄ¼şÃû¸ñÊ½"Ô­ÈÕÖ¾ÎÄ¼şÃû.ĞòºÅ" */ 
-#define LOG_ROTATEMODE_PER_DAY		2	/* °´Ã¿Ìì×ªµµ£»×ªµµÎÄ¼şÃû¸ñÊ½"Ô­ÈÕÖ¾ÎÄ¼şÃû.ÄêÄêÄêÄêÔÂÔÂÈÕÈÕ" */
-#define LOG_ROTATEMODE_PER_HOUR		3	/* °´Ğ¡Ê±×ªµµ£»×ªµµÎÄ¼şÃû¸ñÊ½"Ô­ÈÕÖ¾ÎÄ¼şÃû.ÄêÄêÄêÄêÔÂÔÂÈÕÈÕ_Ğ¡Ê±" */ 
+	/* æ—¥å¿—è½¬æ¡£æ¨¡å¼ */ 
+#define LOG_ROTATEMODE_NONE			0	/* ä¸è½¬æ¡£ */ 
+#define LOG_ROTATEMODE_SIZE			1	/* æŒ‰æ—¥å¿—æ–‡ä»¶å¤§å°è½¬æ¡£ï¼Œå’Œå‡½æ•°SetLogRotateSizeé…åˆä½¿ç”¨ï¼›è½¬æ¡£æ–‡ä»¶åæ ¼å¼"åŸæ—¥å¿—æ–‡ä»¶å.åºå·" */ 
+#define LOG_ROTATEMODE_PER_DAY		2	/* æŒ‰æ¯å¤©è½¬æ¡£ï¼›è½¬æ¡£æ–‡ä»¶åæ ¼å¼"åŸæ—¥å¿—æ–‡ä»¶å.å¹´å¹´å¹´å¹´æœˆæœˆæ—¥æ—¥" */
+#define LOG_ROTATEMODE_PER_HOUR		3	/* æŒ‰å°æ—¶è½¬æ¡£ï¼›è½¬æ¡£æ–‡ä»¶åæ ¼å¼"åŸæ—¥å¿—æ–‡ä»¶å.å¹´å¹´å¹´å¹´æœˆæœˆæ—¥æ—¥_å°æ—¶" */ 
 
-	/* ÈÕÖ¾×ªµµÈ±Ê¡Öµ */ 
+	/* æ—¥å¿—è½¬æ¡£ç¼ºçœå€¼ */ 
 #define LOG_ROTATE_SIZE_FILE_COUNT_DEFAULT			99999999
 #define LOG_ROTATE_SIZE_PRESSURE_FACTOR_DEFAULT		0
 #define LOG_FSYNC_PERIOD							10000
 
 
-	/* »º³åÇø´óĞ¡È±Ê¡Öµ */
-#define LOG_BUFSIZE_DEFAULT				(1024)		/* È±Ê¡ĞĞÈÕÖ¾»º³åÇø´óĞ¡ */
-#define LOG_BUFSIZE_MAX					(16*1024)	/* ×î´óĞĞÈÕÖ¾»º³åÇø´óĞ¡ */
+	/* ç¼“å†²åŒºå¤§å°ç¼ºçœå€¼ */
+#define LOG_BUFSIZE_DEFAULT				(1024)		/* ç¼ºçœè¡Œæ—¥å¿—ç¼“å†²åŒºå¤§å° */
+#define LOG_BUFSIZE_MAX					(16*1024)	/* æœ€å¤§è¡Œæ—¥å¿—ç¼“å†²åŒºå¤§å° */
 
 
-	/* ¸ß¼¶¾ä±ú»·¾³ÉèÖÃº¯Êı */
+	/* é«˜çº§å¥æŸ„ç¯å¢ƒè®¾ç½®å‡½æ•° */
 	_WINDLL_FUNC int SetLogOptions( LOG *g , int log_options );
 	_WINDLL_FUNC int SetLogFileChangeTest( LOG *g , long interval );
 	_WINDLL_FUNC int SetLogFsyncPeriod( LOG *g , long period );
@@ -272,16 +272,16 @@ extern "C" {
 #define TEST_FILEFD(_fd_)				( (_fd_) != FD_NULL && (_fd_) != STDOUT_HANDLE && (_fd_) != STDERR_HANDLE )
 
 
-	/* µÃµ½»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±úµÄº¯Êı°æ±¾ */ /* log handle get/set function for TLS */
+	/* å¾—åˆ°åŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„çš„å‡½æ•°ç‰ˆæœ¬ */ /* log handle get/set function for TLS */
 	_WINDLL_FUNC LOG *GetGlobalLOG();
 	_WINDLL_FUNC void SetGlobalLOG( LOG *g );
 
 
 	/********************************************************/
-	/* ÒÔÏÂÎª¹³×Ó¿ª·¢ the following development for the hook*/
+	/* ä»¥ä¸‹ä¸ºé’©å­å¼€å‘ the following development for the hook*/
 	/********************************************************/
 
-	/* Æ½Ì¨ºê */ /* platfrom macros */
+	/* å¹³å°å® */ /* platfrom macros */
 #if ( defined _WIN32 )
 #define LOG_NEWLINE		"\r\n"
 #define LOG_NEWLINE_LEN		2
@@ -312,7 +312,7 @@ extern "C" {
 #define UNLINK			unlink
 #endif
 
-	/* ´úÂëºê */ 
+	/* ä»£ç å® */ 
 #if ( defined _WIN32 )
 #define SYSTEMTIME2TIMEVAL_USEC(_syst_,_tv_) \
 	(_tv_).tv_usec = (_syst_).wMilliseconds * 1000 ;
@@ -368,7 +368,7 @@ extern "C" {
 	_WINDLL_FUNC long MemcatLogBuffer( LOG *g , LOGBUF *logbuf , char *append , long len );
 
 
-	/* ÈÕÖ¾»º³åÇø½á¹¹ */ 
+	/* æ—¥å¿—ç¼“å†²åŒºç»“æ„ */ 
 	struct tagLOGBUF
 	{
 		long			max_buf_size ;
@@ -378,10 +378,10 @@ extern "C" {
 		long			buf_remain_len ;
 	} ;
 
-	/* ÈÕÖ¾¾ä±ú½á¹¹ */ 
+	/* æ—¥å¿—å¥æŸ„ç»“æ„ */ 
 	struct tagLOG
 	{
-		/* »ù±¾ */
+		/* åŸºæœ¬ */
 		int			output ;
 		char			log_pathfilename[ MAXLEN_FILENAME + 1 ];
 		funcOpenLog		*pfuncOpenLogFirst ;
@@ -400,19 +400,19 @@ extern "C" {
 
 		char			open_flag ;
 
-		/* ÈÕÖ¾µÈ¼¶ */ 
+		/* æ—¥å¿—ç­‰çº§ */ 
 		int			log_level ;
 
 		funcFilterLog		*pfuncFilterLog ;
 
-		/* ĞĞÈÕÖ¾·ç¸ñ */
+		/* è¡Œæ—¥å¿—é£æ ¼ */
 		long			log_styles ;
 		funcLogStyle		*pfuncLogStyle ;
-		/* ·ÖÎöĞĞ¸ñÊ½·ç¸ñ£¬¹¹½¨¸ñÊ½º¯ÊıÊı×é£¬±ãÓÚĞ´ÈÕÖ¾Ê±¿ìËÙÌî³äĞĞÈÕÖ¾»º³åÇø */
+		/* åˆ†æè¡Œæ ¼å¼é£æ ¼ï¼Œæ„å»ºæ ¼å¼å‡½æ•°æ•°ç»„ï¼Œä¾¿äºå†™æ—¥å¿—æ—¶å¿«é€Ÿå¡«å……è¡Œæ—¥å¿—ç¼“å†²åŒº */
 		funcLogStyle		*pfuncLogStyles[ 30 + 1 ] ;
 		int			style_func_count ;
 
-		/* ÈÕÖ¾Ñ¡Ïî */
+		/* æ—¥å¿—é€‰é¡¹ */
 		int			log_options ;
 
 		long			file_change_test_interval ;
@@ -421,10 +421,10 @@ extern "C" {
 		long			fsync_period ;
 		long			fsync_elapse ;
 
-		/* ×Ô¶¨Òå±êÇ© */ 
+		/* è‡ªå®šä¹‰æ ‡ç­¾ */ 
 		char			cust_label[LOG_MAXCNT_CUST_LABEL][ LOG_MAXLEN_CUST_LABEL + 1 ] ;
 
-		/* ÈÕÖ¾×ªµµ */ 
+		/* æ—¥å¿—è½¬æ¡£ */ 
 		int			rotate_mode ;
 		long			log_rotate_size ;
 		long			rotate_file_no ;
@@ -436,15 +436,15 @@ extern "C" {
 		funcAfterRotateFile	*pfuncAfterRotateFile ;
 		funcBeforeRotateFile	*pfuncBeforeRotateFile ;
 
-		/* ĞĞÈÕÖ¾»º³åÇø */
+		/* è¡Œæ—¥å¿—ç¼“å†²åŒº */
 		LOGBUF			logbuf ;
 
 
-		/* Ò»¼¶»º´æ */ 
+		/* ä¸€çº§ç¼“å­˜ */ 
 		struct timeval	cache1_tv ;
 		struct tm		cache1_stime ;
 
-		/* ¶ş¼¶»º´æ */ 
+		/* äºŒçº§ç¼“å­˜ */ 
 		struct timeval	cache2_logstyle_tv ;
 		struct tm		cache2_logstyle_stime ;
 		char			cache2_logstyle_date_buf[ 10 + 1 ] ;
@@ -463,7 +463,7 @@ extern "C" {
 		struct timeval	cache2_rotate_tv ;
 		struct tm		cache2_rotate_stime ;
 
-		/* ×ªµµÎÄ¼şËø */
+		/* è½¬æ¡£æ–‡ä»¶é” */
 #if ( defined _WIN32 )
 		HANDLE			rotate_lock ;
 #elif ( defined __unix ) || ( defined _AIX ) || ( defined __linux__ ) || ( defined __hpux )
@@ -473,10 +473,10 @@ extern "C" {
 	} ;
 
 	/********************************************************/
-	/* ÒÔÏÂÎª¸¨Öú½Ó¿Ú										*/
+	/* ä»¥ä¸‹ä¸ºè¾…åŠ©æ¥å£										*/
 	/********************************************************/
 
-	/* ÅäÖÃ¸¨Öúº¯Êı */ 
+	/* é…ç½®è¾…åŠ©å‡½æ•° */ 
 	_WINDLL_FUNC int ConvertLogOutput_atoi( char *output_desc , int *p_log_output );
 	_WINDLL_FUNC int ConvertLogLevel_atoi( char *log_level_desc , int *p_log_level );
 	_WINDLL_FUNC int ConvertLogLevel_itoa( int log_level , char **log_level_desc );
@@ -486,12 +486,12 @@ extern "C" {
 	_WINDLL_FUNC int ConvertBufferSize_atol( char *bufsize_desc , long *p_bufsize );
 
 
-/* ¶ÁÈ¡ÅäÖÃÎÄ¼ş£¬´´½¨ÈÕÖ¾¾ä±ú */ 
+/* è¯»å–é…ç½®æ–‡ä»¶ï¼Œåˆ›å»ºæ—¥å¿—å¥æŸ„ */ 
 _WINDLL_FUNC LOG *CreateLogHandleFromConfig( char *config_filename , char *postfix );
 
 
 
-/* ·ç¸ñÌæ»»ºê */
+/* é£æ ¼æ›¿æ¢å® */
 #define create_log_handle	CreateLogHandle
 #define destroy_log_handle	DestroyLogHandle
 #define func_open_log		funcOpenLog

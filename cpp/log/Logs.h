@@ -1,4 +1,4 @@
-#ifndef _H_LOGS_
+ï»¿#ifndef _H_LOGS_
 #define _H_LOGS_
 
 /*
@@ -25,17 +25,17 @@ extern "C" {
 
 #include "LOG.h"
 
-/* º¯Êı·µ»ØÖµºê */ 
-#define LOGS_RETURN_ERROR_TOOMANY_LOG	-31	/* Ì«¶àÈÕÖ¾¾ä±úÁË */ 
-#define LOGS_RETURN_ERROR_NOTFOUND		-32	/* Ã»ÓĞ¸ÃÈÕÖ¾¾ä±ú */ 
-#define LOGS_RETURN_INFO_NOTFOUND		32	/* Ã»ÓĞ¸ÃÈÕÖ¾¾ä±úÁË */ 
+/* å‡½æ•°è¿”å›å€¼å® */ 
+#define LOGS_RETURN_ERROR_TOOMANY_LOG	-31	/* å¤ªå¤šæ—¥å¿—å¥æŸ„äº† */ 
+#define LOGS_RETURN_ERROR_NOTFOUND		-32	/* æ²¡æœ‰è¯¥æ—¥å¿—å¥æŸ„ */ 
+#define LOGS_RETURN_INFO_NOTFOUND		32	/* æ²¡æœ‰è¯¥æ—¥å¿—å¥æŸ„äº† */ 
 
-/* ÆäËüºê */ 
-#define LOGS_MAXCNT_LOG			10	/* ÈÕÖ¾¾ä±ú¼¯ºÏÖĞ×î´óÈÕÖ¾¾ä±úÊıÁ¿ */ 
+/* å…¶å®ƒå® */ 
+#define LOGS_MAXCNT_LOG			10	/* æ—¥å¿—å¥æŸ„é›†åˆä¸­æœ€å¤§æ—¥å¿—å¥æŸ„æ•°é‡ */ 
 
 typedef struct tagLOGS LOGS ;
 
-/* ¹ÜÀíÈÕÖ¾¾ä±ú¼¯ºÏº¯Êı */ 
+/* ç®¡ç†æ—¥å¿—å¥æŸ„é›†åˆå‡½æ•° */ 
 _WINDLL_FUNC LOGS *CreateLogsHandle();
 _WINDLL_FUNC void DestroyLogsHandle( LOGS *gs );
 
@@ -44,7 +44,7 @@ _WINDLL_FUNC LOG *RemoveOutLogFromLogs( LOGS *gs , char *g_id );
 _WINDLL_FUNC LOG *GetLogFromLogs( LOGS *gs , char *g_id );
 _WINDLL_FUNC int TravelLogFromLogs( LOGS *gs , long *p_index , char **pp_g_id , LOG **pp_g );
 
-/* Ğ´ÈÕÖ¾¼¯ºÏº¯Êı */ 
+/* å†™æ—¥å¿—é›†åˆå‡½æ•° */ 
 _WINDLL_FUNC int WriteLogs( LOGS *g , char *c_filename , long c_fileline , int log_level , char *format , ... );
 _WINDLL_FUNC int DebugLogs( LOGS *g , char *c_filename , long c_fileline , char *format , ... );
 _WINDLL_FUNC int InfoLogs( LOGS *g , char *c_filename , long c_fileline , char *format , ... );
@@ -53,7 +53,7 @@ _WINDLL_FUNC int ErrorLogs( LOGS *g , char *c_filename , long c_fileline , char 
 _WINDLL_FUNC int FatalLogs( LOGS *g , char *c_filename , long c_fileline , char *format , ... );
 
 
-/* Ğ´ÈÕÖ¾¼¯ºÏº¯ÊıµÄ¿É±ä²ÎÊıºê */ 
+/* å†™æ—¥å¿—é›†åˆå‡½æ•°çš„å¯å˜å‚æ•°å® */ 
 #define WRITELOGS( _g_ , _log_level_ , ... )	WriteLogs( _g_ , __FILE__ , __LINE__ , _log_level_ , __VA_ARGS__ );
 #define DEBUGLOGS( _g_ , ... )			DebugLogs( _g_ , __FILE__ , __LINE__ , __VA_ARGS__ );
 #define INFOLOGS( _g_ , ... )			InfoLogs( _g_ , __FILE__ , __LINE__ , __VA_ARGS__ );
@@ -62,7 +62,7 @@ _WINDLL_FUNC int FatalLogs( LOGS *g , char *c_filename , long c_fileline , char 
 #define FATALLOGS( _g_ , ... )			FatalLogs( _g_ , __FILE__ , __LINE__ , __VA_ARGS__ );
 
 
-/* ·ç¸ñÌæ»»ºê */
+/* é£æ ¼æ›¿æ¢å® */
 #define create_logs_handle		CreateLogsHandle
 #define destroy_logs_handle		DestroyLogsHandle
 
@@ -90,7 +90,7 @@ _WINDLL_FUNC LOG *RemoveOutLogFromLogsG( char *g_id );
 _WINDLL_FUNC LOG *GetLogFromLogsG( char *g_id );
 _WINDLL_FUNC int TravelLogFromLogsG( long *p_index , char **pp_g_id , LOG **pp_g );
 
-/* Ğ´ÈÕÖ¾¼¯ºÏº¯Êı£¨»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±úµÄº¯Êı¼¯ºÏ°æ±¾£© */ 
+/* å†™æ—¥å¿—é›†åˆå‡½æ•°ï¼ˆåŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„çš„å‡½æ•°é›†åˆç‰ˆæœ¬ï¼‰ */ 
 _WINDLL_FUNC int WriteLogsG( char *c_filename , long c_fileline , int log_level , char *format , ... );
 _WINDLL_FUNC int DebugLogsG( char *c_filename , long c_fileline , char *format , ... );
 _WINDLL_FUNC int InfoLogsG( char *c_filename , long c_fileline , char *format , ... );
@@ -99,7 +99,7 @@ _WINDLL_FUNC int ErrorLogsG( char *c_filename , long c_fileline , char *format ,
 _WINDLL_FUNC int FatalLogsG( char *c_filename , long c_fileline , char *format , ... );
 
 
-/* Ğ´ÈÕÖ¾¼¯ºÏº¯ÊıµÄ¿É±ä²ÎÊıºê£¨»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±úµÄº¯Êı¼¯ºÏ°æ±¾£© */
+/* å†™æ—¥å¿—é›†åˆå‡½æ•°çš„å¯å˜å‚æ•°å®ï¼ˆåŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„çš„å‡½æ•°é›†åˆç‰ˆæœ¬ï¼‰ */
 #define WRITELOGSG( _log_level_ , ... )	WriteLogsG( __FILE__ , __LINE__ , _log_level_ , __VA_ARGS__ );
 #define DEBUGLOGSG( ... )		DebugLogsG( __FILE__ , __LINE__ , __VA_ARGS__ );
 #define INFOLOGSG( ... )		InfoLogsG( __FILE__ , __LINE__ , __VA_ARGS__ );
@@ -108,7 +108,7 @@ _WINDLL_FUNC int FatalLogsG( char *c_filename , long c_fileline , char *format ,
 #define FATALLOGSG( ... )		FatalLogsG( __FILE__ , __LINE__ , __VA_ARGS__ );
 
 
-/* ·ç¸ñÌæ»»ºê */
+/* é£æ ¼æ›¿æ¢å® */
 #define create_logs_handle_g		CreateLogsHandleG
 #define destroy_logs_handle_g		DestroyLogsHandleG
 
@@ -125,14 +125,14 @@ _WINDLL_FUNC int FatalLogsG( char *c_filename , long c_fileline , char *format ,
 #define fatal_logs_g			FatalLogsG
 
 
-/* µÃµ½»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±ú¼¯ºÏµÄº¯Êı°æ±¾ */ 
+/* å¾—åˆ°åŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„é›†åˆçš„å‡½æ•°ç‰ˆæœ¬ */ 
 _WINDLL_FUNC LOGS *GetGlobalLOGS();
 _WINDLL_FUNC void SetGlobalLOGS( LOGS *gs );
 #define get_global_logs		GetGlobalLOGS
 #define set_global_logs		SetGlobalLOGS
 #endif
 
-/* ¶ÁÈ¡ÅäÖÃÎÄ¼ş£¬´´½¨ÈÕÖ¾¾ä±ú¼¯ºÏ */ 
+/* è¯»å–é…ç½®æ–‡ä»¶ï¼Œåˆ›å»ºæ—¥å¿—å¥æŸ„é›†åˆ */ 
 _WINDLL_FUNC LOGS *CreateLogsHandleFromConfig( char *config_filename , char *postfix );
 #define create_logs_handle_from_config		CreateLogsHandleFromConfig
 

@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 * iLOG3 - log function library written in c
 * author	: calvin
 * email	: calvinwilliams.c@gmail.com
@@ -19,21 +19,21 @@
 #include "LOGS.h"
 
 
-/* ÈÕÖ¾¾ä±ú¼¯ºÏ½á¹¹ */ /* log handle collection structure */
+/* æ—¥å¿—å¥æŸ„é›†åˆç»“æ„ */ /* log handle collection structure */
 struct tagLOGS
 {
 	char	*g_id[ LOGS_MAXCNT_LOG + 1 ] ;
 	LOG	*g[ LOGS_MAXCNT_LOG + 1 ] ;
 } ;
 
-/* Ïß³Ì±¾µØ´æ´¢È«¾Ö¶ÔÏó */ /* TLS */
+/* çº¿ç¨‹æœ¬åœ°å­˜å‚¨å…¨å±€å¯¹è±¡ */ /* TLS */
 #if ( defined _WIN32 )
 __declspec( thread ) LOGS	*tls_gs = NULL ;
 #elif ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX )
 __thread LOGS			*tls_gs = NULL ;
 #endif
 
-/* Ïú»ÙÈÕÖ¾¾ä±ú¼¯ºÏ */ /* destruction of logging handle collection */
+/* é”€æ¯æ—¥å¿—å¥æŸ„é›†åˆ */ /* destruction of logging handle collection */
 void DestroyLogsHandle( LOGS *gs )
 {
 	if( gs )
@@ -63,7 +63,7 @@ void DestroyLogsHandleG()
 }
 #endif
 
-/* ´´½¨ÈÕÖ¾¾ä±ú¼¯ºÏ */ /* create log handle collection */
+/* åˆ›å»ºæ—¥å¿—å¥æŸ„é›†åˆ */ /* create log handle collection */
 LOGS *CreateLogsHandle()
 {
 	LOGS	*gs = NULL ;
@@ -84,7 +84,7 @@ LOGS *CreateLogsHandleG()
 }
 #endif
 
-#if ( defined __STDC_VERSION__ ) && ( __STDC_VERSION__ >= 199901 ) /* ÎªÁËÏÂÃæº¯ÊıµÄstrdupÄÜ±àÒë²»±¨¾¯¸æ */
+#if ( defined __STDC_VERSION__ ) && ( __STDC_VERSION__ >= 199901 ) /* ä¸ºäº†ä¸‹é¢å‡½æ•°çš„strdupèƒ½ç¼–è¯‘ä¸æŠ¥è­¦å‘Š */
 char *strdup(const char *s);
 #endif
 
@@ -202,7 +202,7 @@ int TravelLogFromLogsG( long *p_index , char **pp_id , LOG **pp_g )
 #endif
 
 #if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
-/* µÃµ½»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±ú¼¯ºÏµÄº¯Êı°æ±¾ */
+/* å¾—åˆ°åŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„é›†åˆçš„å‡½æ•°ç‰ˆæœ¬ */
 LOGS *GetGlobalLOGS()
 {
 	return tls_gs;
@@ -216,7 +216,7 @@ void SetGlobalLOGS( LOGS *gs )
 
 extern int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , char *format , va_list valist );
 
-/* ´úÂëºê */ /* code macro */
+/* ä»£ç å® */ /* code macro */
 #define WRITELOGSBASE(_gs_,_log_level_) \
 	long		g_no ; \
 	LOG		**pp_g = NULL ; \
@@ -239,7 +239,7 @@ extern int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_l
 	return nret; \
 }
 
-/* ´øÈÕÖ¾µÈ¼¶µÄĞ´ÈÕÖ¾ */ /* write log handle collection */
+/* å¸¦æ—¥å¿—ç­‰çº§çš„å†™æ—¥å¿— */ /* write log handle collection */
 int WriteLogs( LOGS *gs , char *c_filename , long c_fileline , int log_level , char *format , ... )
 {
 	WRITELOGSBASE( gs , log_level )
@@ -253,7 +253,7 @@ int WriteLogsG( char *c_filename , long c_fileline , int log_level , char *forma
 		return 0;
 }
 
-/* Ğ´µ÷ÊÔÈÕÖ¾ */ /* write debug log handle collection */
+/* å†™è°ƒè¯•æ—¥å¿— */ /* write debug log handle collection */
 int DebugLogs( LOGS *gs , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGSBASE( gs , LOG_LEVEL_DEBUG )
@@ -268,7 +268,7 @@ int DebugLogsG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´ÆÕÍ¨ĞÅÏ¢ÈÕÖ¾ */ /* write info log handle collection */
+/* å†™æ™®é€šä¿¡æ¯æ—¥å¿— */ /* write info log handle collection */
 int InfoLogs( LOGS *gs , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGSBASE( gs , LOG_LEVEL_INFO )
@@ -283,7 +283,7 @@ int InfoLogsG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´¾¯¸æÈÕÖ¾ */ /* write warn log handle collection */
+/* å†™è­¦å‘Šæ—¥å¿— */ /* write warn log handle collection */
 int WarnLogs( LOGS *gs , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGSBASE( gs , LOG_LEVEL_WARN )
@@ -298,7 +298,7 @@ int WarnLogsG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´´íÎóÈÕÖ¾ */ /* write error log handle collection */
+/* å†™é”™è¯¯æ—¥å¿— */ /* write error log handle collection */
 int ErrorLogs( LOGS *gs , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGSBASE( gs , LOG_LEVEL_ERROR )
@@ -313,7 +313,7 @@ int ErrorLogsG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´ÖÂÃü´íÎóÈÕÖ¾ */ /* write fatal log handle collection */
+/* å†™è‡´å‘½é”™è¯¯æ—¥å¿— */ /* write fatal log handle collection */
 int FatalLogs( LOGS *gs , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGSBASE( gs , LOG_LEVEL_FATAL )

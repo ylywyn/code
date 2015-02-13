@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 * iLOG3 - log function library written in c
 * author	: calvin
 * email	: calvinwilliams.c@gmail.com
@@ -20,20 +20,20 @@
 #include "LOG.h"
 
 
-/* ÈÕÖ¾µÈ¼¶ÃèÊö¶ÔÕÕ±í */ /* log level describe */
+/* æ—¥å¿—ç­‰çº§æè¿°å¯¹ç…§è¡¨ */ /* log level describe */
 static char		sg_aszLogLevelDesc[][5+1] = { "DEBUG" , "INFO" , "WARN" , "ERROR" , "FATAL" , "NOLOG" } ;
 
-/* °æ±¾±êÊ¶ */ /* version */
+/* ç‰ˆæœ¬æ ‡è¯† */ /* version */
 _WINDLL_FUNC int	_LOG_VERSION_1_0_11 = 0 ;
 
-/* Ïß³Ì±¾µØ´æ´¢È«¾Ö¶ÔÏó */ /* TLS */
+/* çº¿ç¨‹æœ¬åœ°å­˜å‚¨å…¨å±€å¯¹è±¡ */ /* TLS */
 #if ( defined _WIN32 )
 __declspec( thread ) LOG	*tls_g = NULL ;
 #elif ( defined __linux__ ) || ( defined _AIX )
 __thread LOG			*tls_g = NULL ;
 #endif
 
-/* ÁÙ½çÇø */ /* critical region */
+/* ä¸´ç•ŒåŒº */ /* critical region */
 #if ( defined __linux__ ) || ( defined __unix ) || ( defined _AIX )
 pthread_mutex_t		g_pthread_mutex = PTHREAD_MUTEX_INITIALIZER ;
 #endif
@@ -122,7 +122,7 @@ static int LeaveMutexSection( LOG *g )
 	return 0;
 }
 
-/* µ÷Õû»º³åÇø´óĞ¡ */ /* adjust buffer size */
+/* è°ƒæ•´ç¼“å†²åŒºå¤§å° */ /* adjust buffer size */
 static int SetBufferSize( LOG *g , LOGBUF *logbuf , long buf_size , long max_buf_size )
 {
 	int		nret = 0 ;
@@ -174,7 +174,7 @@ static int SetBufferSize( LOG *g , LOGBUF *logbuf , long buf_size , long max_buf
 	return 0;
 }
 
-/* Ïú»ÙÈÕÖ¾¾ä±ú */ /* destruction of log handle */
+/* é”€æ¯æ—¥å¿—å¥æŸ„ */ /* destruction of log handle */
 void DestroyLogHandle( LOG *g )
 {
 	if( g )
@@ -212,7 +212,7 @@ void DestroyLogHandleG()
 }
 #endif
 
-/* ´´½¨ÈÕÖ¾¾ä±ú */ /* create log handle */
+/* åˆ›å»ºæ—¥å¿—å¥æŸ„ */ /* create log handle */
 LOG *CreateLogHandle()
 {
 	LOG		_g , *g = NULL ;
@@ -272,10 +272,10 @@ LOG *CreateLogHandleG()
 }
 #endif
 
-/* ´ò¿ª¡¢Êä³ö¡¢¹Ø±ÕÈÕÖ¾º¯Êı */ /* open , write , close log functions */
+/* æ‰“å¼€ã€è¾“å‡ºã€å…³é—­æ—¥å¿—å‡½æ•° */ /* open , write , close log functions */
 #if ( defined _WIN32 )
 
-#define LOG_WINOPENFILE_TRYCOUNT	1000	/* windowsÉÏ¶àÏß³Ì´ò¿ªÍ¬Ò»ÎÄ¼ş»áÓĞ»¥³âÏÖÏó */
+#define LOG_WINOPENFILE_TRYCOUNT	1000	/* windowsä¸Šå¤šçº¿ç¨‹æ‰“å¼€åŒä¸€æ–‡ä»¶ä¼šæœ‰äº’æ–¥ç°è±¡ */
 
 static int OpenLog_OpenFile( LOG *g , char *log_pathfilename , void **open_handle )
 {
@@ -504,7 +504,7 @@ int ExpandPathFilename( char *pathfilename , long pathfilename_bufsize )
 	p1 = strchr( pathfilename , '$' );
 	while( p1 )
 	{
-		/* Õ¹¿ª»·¾³±äÁ¿ */ /* expand environment variable */
+		/* å±•å¼€ç¯å¢ƒå˜é‡ */ /* expand environment variable */
 		p2 = strchr( p1 + 1 , '$' ) ;
 		if( p2 == NULL )
 			return LOG_RETURN_ERROR_PARAMETER;
@@ -530,7 +530,7 @@ int ExpandPathFilename( char *pathfilename , long pathfilename_bufsize )
 	return 0;
 }
 
-/* ÉèÖÃÈÕÖ¾Êä³ö */ /* set log output */
+/* è®¾ç½®æ—¥å¿—è¾“å‡º */ /* set log output */
 int SetLogOutput( LOG *g , int output , char *log_pathfilename , funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfuncOpenLog , funcWriteLog *pfuncWriteLog , funcChangeTest *pfuncChangeTest , funcCloseLog *pfuncCloseLog , funcCloseLog *pfuncCloseLogFinally )
 {
 	char		pathfilename[ MAXLEN_FILENAME + 1 ] ;
@@ -746,7 +746,7 @@ int SetLogOutputG( int output , char *log_pathfilename , funcOpenLog *pfuncOpenL
 }
 #endif
 
-/* ÉèÖÃÈÕÖ¾µÈ¼¶ */ /* set log level */
+/* è®¾ç½®æ—¥å¿—ç­‰çº§ */ /* set log level */
 int SetLogLevel( LOG *g , int log_level )
 {
 	if( g == NULL )
@@ -762,7 +762,7 @@ int SetLogLevelG( int log_level )
 }
 #endif
 
-/* ĞĞ¸ñÊ½º¯Êı¼¯ºÏ */ /* log style functions */
+/* è¡Œæ ¼å¼å‡½æ•°é›†åˆ */ /* log style functions */
 static int LogStyle_SEPARATOR( LOG *g , LOGBUF *logbuf , char *c_filename , long c_fileline , int log_level , char *format , va_list valist )
 {
 	MemcatLogBuffer( g , logbuf , " | " , 3 );
@@ -948,13 +948,13 @@ static int LogStyle_NEWLINE( LOG *g , LOGBUF *logbuf , char *c_filename , long c
 	return 0;
 }
 
-/* Ìî³äĞĞÈÕÖ¾¶Î */ /* fill log segments */
+/* å¡«å……è¡Œæ—¥å¿—æ®µ */ /* fill log segments */
 static int LogStyle_FuncArray( LOG *g , LOGBUF *logbuf , char *c_filename , long c_fileline , int log_level , char *format , va_list valist )
 {
 	int		format_func_index ;
 	funcLogStyle	**ppfuncLogStyle = NULL ;
 	int		nret ;
-	/* ±éÀú¸ñÊ½º¯ÊıÊı×é */ /* travel all log style functions */
+	/* éå†æ ¼å¼å‡½æ•°æ•°ç»„ */ /* travel all log style functions */
 	for( format_func_index = 0 , ppfuncLogStyle = g->pfuncLogStyles ; format_func_index < g->style_func_count ; format_func_index++ , ppfuncLogStyle++ )
 	{
 		nret = (*ppfuncLogStyle)( g , logbuf , c_filename , c_fileline , log_level , format , valist ) ;
@@ -965,7 +965,7 @@ static int LogStyle_FuncArray( LOG *g , LOGBUF *logbuf , char *c_filename , long
 	return 0;
 }
 
-/* ÉèÖÃĞĞÈÕÖ¾·ç¸ñ */ /* set log styles */
+/* è®¾ç½®è¡Œæ—¥å¿—é£æ ¼ */ /* set log styles */
 int SetLogStyles( LOG *g , long log_styles , funcLogStyle *pfuncLogStyle )
 {
 	if( g == NULL )
@@ -978,7 +978,7 @@ int SetLogStyles( LOG *g , long log_styles , funcLogStyle *pfuncLogStyle )
 		return 0;
 	}
 
-	/* ¹¹ÔìĞĞ·ç¸ñº¯ÊıÊı×é */
+	/* æ„é€ è¡Œé£æ ¼å‡½æ•°æ•°ç»„ */
 	g->style_func_count = 0 ;
 
 	if( TEST_ATTRIBUTE( g->log_styles , LOG_STYLE_DATETIMEMS ) )
@@ -1061,7 +1061,7 @@ int SetLogStylesG( long log_styles , funcLogStyle *pfuncLogStyles )
 }
 #endif
 
-/* ×ªµµÈÕÖ¾ÎÄ¼ş */ /* rotate log file */
+/* è½¬æ¡£æ—¥å¿—æ–‡ä»¶ */ /* rotate log file */
 static int RotateLogFileSize( LOG *g , long step )
 {
 	char		rotate_log_pathfilename[ MAXLEN_FILENAME + 1 ] ;
@@ -1264,7 +1264,7 @@ static int RotateLogFilePerHour( LOG *g )
 		return 0;
 }
 
-/* Ğ´ÈÕÖ¾»ùº¯Êı */ /* output log */
+/* å†™æ—¥å¿—åŸºå‡½æ•° */ /* output log */
 int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , char *format , va_list valist )
 {
 	long    writelen ;
@@ -1273,11 +1273,11 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 	if( format == NULL )
 		return 0;
 
-	/* ³õÊ¼»¯ĞĞÈÕÖ¾»º³åÇø */ /* initialize log buffer  */
+	/* åˆå§‹åŒ–è¡Œæ—¥å¿—ç¼“å†²åŒº */ /* initialize log buffer  */
 	g->logbuf.buf_remain_len = g->logbuf.buf_size - 1 - 1 ;
 	g->logbuf.bufptr = g->logbuf.bufbase ;
 
-	/* Ìî³äĞĞÈÕÖ¾»º³åÇø */ /* fill log buffer */
+	/* å¡«å……è¡Œæ—¥å¿—ç¼“å†²åŒº */ /* fill log buffer */
 	if( g->pfuncLogStyle )
 	{
 		nret = g->pfuncLogStyle( g , & (g->logbuf) , c_filename , c_fileline , log_level , format , valist ) ;
@@ -1285,7 +1285,7 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 			return nret;
 	}
 
-	/* ×Ô¶¨Òå¹ıÂËÈÕÖ¾ */ /* filter log */
+	/* è‡ªå®šä¹‰è¿‡æ»¤æ—¥å¿— */ /* filter log */
 	if( g->pfuncFilterLog )
 	{
 		nret = g->pfuncFilterLog( g , & (g->open_handle) , log_level , g->logbuf.bufbase , g->logbuf.buf_size-1-1 - g->logbuf.buf_remain_len ) ;
@@ -1293,12 +1293,12 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 			return nret;
 	}
 
-	/* ´ò¿ªÎÄ¼ş */ /* open log */
+	/* æ‰“å¼€æ–‡ä»¶ */ /* open log */
 	if( g->open_flag == 0 )
 	{
 		if( TEST_ATTRIBUTE( g->log_options , LOG_OPTION_CHANGE_TEST ) || TEST_ATTRIBUTE( g->log_options , LOG_OPTION_OPEN_ONCE ) )
 		{
-			/* ´ò¿ªÈÕÖ¾ÎÄ¼ş */
+			/* æ‰“å¼€æ—¥å¿—æ–‡ä»¶ */
 			if( g->pfuncOpenLogFirst )
 			{
 				nret = g->pfuncOpenLogFirst( g , g->log_pathfilename , & (g->open_handle) ) ;
@@ -1308,7 +1308,7 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 		}
 		else if( TEST_ATTRIBUTE( g->log_options , LOG_OPTION_OPEN_AND_CLOSE ) )
 		{
-			/* ´ò¿ªÈÕÖ¾ÎÄ¼ş */
+			/* æ‰“å¼€æ—¥å¿—æ–‡ä»¶ */
 			if( g->pfuncOpenLog )
 			{
 				nret = g->pfuncOpenLog( g , g->log_pathfilename , & (g->open_handle) ) ;
@@ -1318,7 +1318,7 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 		}
 	}
 
-	/* µ¼³öÈÕÖ¾»º³åÇø */ /* output log */
+	/* å¯¼å‡ºæ—¥å¿—ç¼“å†²åŒº */ /* output log */
 	if( g->pfuncWriteLog )
 	{
 		nret = g->pfuncWriteLog( g , & (g->open_handle) , log_level , g->logbuf.bufbase , g->logbuf.buf_size-1-1 - g->logbuf.buf_remain_len , & writelen ) ;
@@ -1338,14 +1338,14 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 	}
 #endif
 
-	/* ¹Ø±ÕÈÕÖ¾ */ /* close log */
+	/* å…³é—­æ—¥å¿— */ /* close log */
 	if( g->open_flag == 1 )
 	{
 		if( g->output == LOG_OUTPUT_FILE || g->output == LOG_OUTPUT_CALLBACK )
 		{
 			if( TEST_ATTRIBUTE( g->log_options , LOG_OPTION_CHANGE_TEST ) )
 			{
-				/* ²âÊÔÈÕÖ¾ÎÄ¼ş */
+				/* æµ‹è¯•æ—¥å¿—æ–‡ä»¶ */
 				if( g->pfuncChangeTest )
 				{
 					nret = g->pfuncChangeTest( g , & (g->test_handle) ) ;
@@ -1355,7 +1355,7 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 			}
 			else if( TEST_ATTRIBUTE( g->log_options , LOG_OPTION_OPEN_AND_CLOSE ) )
 			{
-				/* ¹Ø±ÕÈÕÖ¾ÎÄ¼ş */
+				/* å…³é—­æ—¥å¿—æ–‡ä»¶ */
 				if( g->pfuncCloseLog )
 				{
 					nret = g->pfuncCloseLog( g , & (g->open_handle) ) ;
@@ -1366,10 +1366,10 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 		}
 	}
 
-	/* Èç¹ûÊä³öµ½ÎÄ¼ş */
+	/* å¦‚æœè¾“å‡ºåˆ°æ–‡ä»¶ */
 	if( g->output == LOG_OUTPUT_FILE )
 	{
-		/* ÈÕÖ¾×ªµµÕì²â */ /* rotate log file */
+		/* æ—¥å¿—è½¬æ¡£ä¾¦æµ‹ */ /* rotate log file */
 		if( g->rotate_mode == LOG_ROTATEMODE_NONE )
 		{
 		}
@@ -1391,14 +1391,14 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 		}
 	}
 
-	/* Çå¿ÕÒ»¼¶»º´æ */ /* clean level 1 cache */
+	/* æ¸…ç©ºä¸€çº§ç¼“å­˜ */ /* clean level 1 cache */
 	g->cache1_tv.tv_sec = 0 ;
 	g->cache1_stime.tm_mday = 0 ;
 
 	return 0;
 }
 
-/* ´úÂëºê */ /* code macros */
+/* ä»£ç å® */ /* code macros */
 #define WRITELOGBASE(_g_,_log_level_) \
 	va_list		valist; \
 	int		nret ; \
@@ -1414,7 +1414,7 @@ int WriteLogBase( LOG *g , char *c_filename , long c_fileline , int log_level , 
 	if( nret < 0 ) \
 	return nret;
 
-/* ´øÈÕÖ¾µÈ¼¶µÄĞ´ÈÕÖ¾ */ /* write log */
+/* å¸¦æ—¥å¿—ç­‰çº§çš„å†™æ—¥å¿— */ /* write log */
 int WriteLog( LOG *g , char *c_filename , long c_fileline , int log_level , char *format , ... )
 {
 	WRITELOGBASE( g , log_level )
@@ -1429,7 +1429,7 @@ int WriteLogG( char *c_filename , long c_fileline , int log_level , char *format
 }
 #endif
 
-/* Ğ´µ÷ÊÔÈÕÖ¾ */ /* write debug log */
+/* å†™è°ƒè¯•æ—¥å¿— */ /* write debug log */
 int DebugLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( g , LOG_LEVEL_DEBUG )
@@ -1444,7 +1444,7 @@ int DebugLogG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´ÆÕÍ¨ĞÅÏ¢ÈÕÖ¾ */ /* write info log */
+/* å†™æ™®é€šä¿¡æ¯æ—¥å¿— */ /* write info log */
 int InfoLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( g , LOG_LEVEL_INFO )
@@ -1459,7 +1459,7 @@ int InfoLogG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´¾¯¸æÈÕÖ¾ */ /* write warn log */
+/* å†™è­¦å‘Šæ—¥å¿— */ /* write warn log */
 int WarnLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( g , LOG_LEVEL_WARN )
@@ -1474,7 +1474,7 @@ int WarnLogG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´´íÎóÈÕÖ¾ */ /* write error log */
+/* å†™é”™è¯¯æ—¥å¿— */ /* write error log */
 int ErrorLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( g , LOG_LEVEL_ERROR )
@@ -1489,7 +1489,7 @@ int ErrorLogG( char *c_filename , long c_fileline , char *format , ... )
 }
 #endif
 
-/* Ğ´ÖÂÃü´íÎóÈÕÖ¾ */ /* write fatal log */
+/* å†™è‡´å‘½é”™è¯¯æ—¥å¿— */ /* write fatal log */
 int FatalLog( LOG *g , char *c_filename , long c_fileline , char *format , ... )
 {
 	WRITELOGBASE( g , LOG_LEVEL_FATAL )
@@ -1505,10 +1505,10 @@ int FatalLogG( char *c_filename , long c_fileline , char *format , ... )
 #endif
 
 
-/* ÎÄ¼ş±ä¶¯²âÊÔ¼ä¸ô */
+/* æ–‡ä»¶å˜åŠ¨æµ‹è¯•é—´éš” */
 #define LOG_FILECHANGETEST_INTERVAL_ON_OPEN_ONCE_DEFAULT	10
 
-/* ÉèÖÃÈÕÖ¾Ñ¡Ïî */ /* set log options */
+/* è®¾ç½®æ—¥å¿—é€‰é¡¹ */ /* set log options */
 int SetLogOptions( LOG *g , int log_options )
 {
 	if( g == NULL )
@@ -1528,7 +1528,7 @@ int SetLogOptionsG( int log_options )
 }
 #endif
 
-/* ÉèÖÃÎÄ¼ş¸Ä±ä²âÊÔ¼ä¸ô */
+/* è®¾ç½®æ–‡ä»¶æ”¹å˜æµ‹è¯•é—´éš” */
 int SetLogFileChangeTest( LOG *g , long interval )
 {
 	if( g == NULL )
@@ -1548,7 +1548,7 @@ int SetLogFileChangeTestG( long interval )
 }
 #endif
 
-/* Ë¢´æ´¢IOÖÜÆÚ */
+/* åˆ·å­˜å‚¨IOå‘¨æœŸ */
 int SetLogFsyncPeriod( LOG *g , long period )
 {
 	g->fsync_period = period ;
@@ -1564,7 +1564,7 @@ int SetLogFsyncPeriodG( long period )
 }
 #endif
 
-/* ÉèÖÃÈÕÖ¾×Ô¶¨Òå±êÇ© */ /* set log custom labels */
+/* è®¾ç½®æ—¥å¿—è‡ªå®šä¹‰æ ‡ç­¾ */ /* set log custom labels */
 int SetLogCustLabel( LOG *g , int index , char *cust_label )
 {
 	if( g == NULL )
@@ -1589,7 +1589,7 @@ int SetLogCustLabelG( int index , char *cust_label )
 }
 #endif
 
-/* ÉèÖÃÈÕÖ¾×ªµµÄ£Ê½ */ /* set log rotate mode */
+/* è®¾ç½®æ—¥å¿—è½¬æ¡£æ¨¡å¼ */ /* set log rotate mode */
 int SetLogRotateMode( LOG *g , int rotate_mode )
 {
 	if( g == NULL )
@@ -1614,7 +1614,7 @@ int SetLogRotateModeG( int rotate_mode )
 }
 #endif
 
-/* ÉèÖÃÈÕÖ¾×ªµµ´óĞ¡ */ /* set rotate size */
+/* è®¾ç½®æ—¥å¿—è½¬æ¡£å¤§å° */ /* set rotate size */
 int SetLogRotateSize( LOG *g , long log_rotate_size )
 {
 	if( g == NULL )
@@ -1632,7 +1632,7 @@ int SetLogRotateSizeG( long log_rotate_size )
 }
 #endif
 
-/* ÉèÖÃÈÕÖ¾×ªµµ½ôÆÈÏµÊı */ /* set rotate pressure fator */
+/* è®¾ç½®æ—¥å¿—è½¬æ¡£ç´§è¿«ç³»æ•° */ /* set rotate pressure fator */
 int SetLogRotatePressureFactor( LOG *g , long pressure_factor )
 {
 	if( g == NULL )
@@ -1650,7 +1650,7 @@ int SetLogRotatePressureFactorG( long pressure_factor )
 }
 #endif
 
-/* ÉèÖÃÈÕÖ¾×ªµµ×î´óºó×ºĞòºÅ */
+/* è®¾ç½®æ—¥å¿—è½¬æ¡£æœ€å¤§åç¼€åºå· */
 int SetLogRotateFileCount( LOG *g , long rotate_file_count )
 {
 	if( g == NULL )
@@ -1668,7 +1668,7 @@ int SetLogRotateFileCountG( long rotate_file_count )
 }
 #endif
 
-/* ÉèÖÃ×Ô¶¨ÒåÈÕÖ¾×ªµµÇ°»Øµ÷º¯Êı */ /* set custom callback function before rotate log */
+/* è®¾ç½®è‡ªå®šä¹‰æ—¥å¿—è½¬æ¡£å‰å›è°ƒå‡½æ•° */ /* set custom callback function before rotate log */
 int SetBeforeRotateFileFunc( LOG *g , funcBeforeRotateFile *pfuncBeforeRotateFile )
 {
 	g->pfuncBeforeRotateFile = pfuncBeforeRotateFile ;
@@ -1682,7 +1682,7 @@ int SetBeforeRotateFileFuncG( funcBeforeRotateFile *pfuncBeforeRotateFile )
 }
 #endif
 
-/* ÉèÖÃ×Ô¶¨ÒåÈÕÖ¾×ªµµºó»Øµ÷º¯Êı */ /* set custom callback function after rotate log */
+/* è®¾ç½®è‡ªå®šä¹‰æ—¥å¿—è½¬æ¡£åå›è°ƒå‡½æ•° */ /* set custom callback function after rotate log */
 int SetAfterRotateFileFunc( LOG *g , funcAfterRotateFile *pfuncAfterRotateFile )
 {
 	g->pfuncAfterRotateFile = pfuncAfterRotateFile ;
@@ -1696,7 +1696,7 @@ int SetAfterRotateFileFuncG( funcAfterRotateFile *pfuncAfterRotateFile )
 }
 #endif
 
-/* ÉèÖÃ×Ô¶¨Òå¼ì²éÈÕÖ¾µÈ¼¶»Øµ÷º¯ÊıÀàĞÍ */ /* set custom filter callback function */
+/* è®¾ç½®è‡ªå®šä¹‰æ£€æŸ¥æ—¥å¿—ç­‰çº§å›è°ƒå‡½æ•°ç±»å‹ */ /* set custom filter callback function */
 int SetFilterLogFunc( LOG *g , funcFilterLog *pfuncFilterLog )
 {
 	g->pfuncFilterLog = pfuncFilterLog ;
@@ -1710,7 +1710,7 @@ int SetFilterLogFuncG( funcFilterLog *pfuncFilterLog )
 }
 #endif
 
-/* ÉèÖÃĞĞÈÕÖ¾»º³åÇø´óĞ¡ */ /* set log buffer size */
+/* è®¾ç½®è¡Œæ—¥å¿—ç¼“å†²åŒºå¤§å° */ /* set log buffer size */
 int SetLogBufferSize( LOG *g , long log_bufsize , long max_log_bufsize )
 {
 	return SetBufferSize( g , & (g->logbuf) , log_bufsize , max_log_bufsize );
@@ -1725,7 +1725,7 @@ int SetLogBufferSizeG( long log_bufsize , long max_log_bufsize )
 
 
 
-/* Ö±½ÓÉèÖÃÈÕÖ¾Êä³ö»Øµ÷º¯Êı */
+/* ç›´æ¥è®¾ç½®æ—¥å¿—è¾“å‡ºå›è°ƒå‡½æ•° */
 int SetLogOutputFuncDirectly( LOG *g , funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfuncOpenLog , funcWriteLog *pfuncWriteLog , funcChangeTest *pfuncChangeTest , funcCloseLog *pfuncCloseLog , funcCloseLog *pfuncCloseLogFinally )
 {
 	g->pfuncOpenLogFirst = pfuncOpenLogFirst ;
@@ -1744,7 +1744,7 @@ int SetLogOutputFuncDirectlyG( funcOpenLog *pfuncOpenLogFirst , funcOpenLog *pfu
 }
 #endif
 
-/* Ö±½ÓÉèÖÃĞĞÈÕÖ¾·ç¸ñ»Øµ÷º¯Êı */
+/* ç›´æ¥è®¾ç½®è¡Œæ—¥å¿—é£æ ¼å›è°ƒå‡½æ•° */
 int SetLogStyleFuncDirectly( LOG *g , funcLogStyle *pfuncLogStyle )
 {
 	g->pfuncLogStyle = pfuncLogStyle ;
@@ -1760,7 +1760,7 @@ int SetLogStyleFuncDirectlyG( funcLogStyle *pfuncLogStyle )
 #endif
 
 #if ( defined _WIN32 ) || ( defined __linux__ ) || ( defined _AIX ) || ( defined __hpux )
-/* µÃµ½»ùÓÚÏß³Ì±¾µØ´æ´¢µÄÈ±Ê¡ÈÕÖ¾¾ä±úµÄº¯Êı°æ±¾ */
+/* å¾—åˆ°åŸºäºçº¿ç¨‹æœ¬åœ°å­˜å‚¨çš„ç¼ºçœæ—¥å¿—å¥æŸ„çš„å‡½æ•°ç‰ˆæœ¬ */
 LOG *GetGlobalLOG()
 {
 	return tls_g;
@@ -2042,7 +2042,7 @@ _WINDLL_FUNC LOG *ReadLogHandleFromConfig( FILE *fp , char *id )
 
 	while(1)
 	{
-		/* ¶ÁÈëÒ»ĞĞ²¢·Ö½âÖ® */ /* read a row and decomposition */
+		/* è¯»å…¥ä¸€è¡Œå¹¶åˆ†è§£ä¹‹ */ /* read a row and decomposition */
 		memset( filebuffer , 0x00 , sizeof(filebuffer) );
 		if( fgets( filebuffer , sizeof(filebuffer)-1 , fp ) == NULL )
 			break;
@@ -2058,7 +2058,7 @@ _WINDLL_FUNC LOG *ReadLogHandleFromConfig( FILE *fp , char *id )
 		{
 			long	len2 ;
 			len2 = strlen(value2) ;
-			if( value2[len2-1] == '\"' ) /* Èç¹û×îºóÎªÒıºÅ£¬È¥µôÖ® */ /* by found */
+			if( value2[len2-1] == '\"' ) /* å¦‚æœæœ€åä¸ºå¼•å·ï¼Œå»æ‰ä¹‹ */ /* by found */
 				value2[len2-1] = '\0' ;
 			memmove( value2 , value2 + 1 , len2 - 1 );
 		}
