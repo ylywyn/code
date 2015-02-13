@@ -27,17 +27,14 @@ struct VNode {
 
 //hash算法
 struct MurmurHash {
-	static uint32_t hash(const std::string& key) {
+	uint32_t hash(const std::string& key) {
 		result_type ret = 0;
 		MurmurHash2(key.c_str(), key.size(), &ret);
 		return ret;
 	}
 
 	uint32_t operator()(const VNode& node) {
-		result_type ret = 0;
-		std::string name = node.to_str();
-		MurmurHash2(name.c_str(), name.size(), &ret);
-		return ret;
+		return hash(node.to_str());
 	}
 	typedef uint32_t result_type;
 };
@@ -61,16 +58,15 @@ public:
 
 public:
 
-	ConsistentHashMap() {}
+	ConsistentHashMap() :vnodecount_(100){}
 	~ConsistentHashMap() {}
 
 	//插入节点， 
 	//node：节点IP
-	//vnodecount: 虚拟节点数量
-	void insert(const std::string& node, std::size_t vnodecount)
+	void insert(const std::string& node)
 	{
 		VNode vnode(node, 0);
-		for (std::size_t i = 0; i<vnodecount; ++i)
+		for (std::size_t i = 0; i<vnodecount_; ++i)
 		{
 			vnode.vnode_id = i;
 			insert(vnode);
@@ -79,8 +75,10 @@ public:
 
 	//根据id返回， host
 	iterator find(std::string& key) {
-		return find(MurmurHash::hash(key));
+		return find(hasher_.hash(key));
 	}
+
+	void set_vnode_count(std::size_t c){ vnodecount_ = c; }
 private:
 	std::size_t size() const {
 		return nodes_.size();
@@ -127,6 +125,7 @@ private:
 
 	Hash hasher_;
 	map_type nodes_;
+	std::size_t vnodecount_;
 };
 
 typedef ConsistentHashMap<VNode, MurmurHash> consistent_hash_t;
